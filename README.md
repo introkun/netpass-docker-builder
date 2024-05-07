@@ -5,7 +5,6 @@
 ## Building environment
 To build the environment image - run command:
 ```bash
-cd netpass-docker-builder
 docker build -t netpass_builder -f ./Dockerfile ./
 ```
 Build environment image need to be created once and recreated with the same command every time `Dockerfile` changed.
