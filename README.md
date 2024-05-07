@@ -23,4 +23,4 @@ docker run --rm -v ./:/build/source -u $(id -u):$(id -g) -ti netpass_builder cle
 This will run command `make clean` overriding default arguments
 
 # Afterword
-For now it was created as Proof of Concept and can be changed in the future to being more universal.
+For now it was created as Proof of Concept and can be changed in the future to being more universal. Probably will use multistage capabilities.
