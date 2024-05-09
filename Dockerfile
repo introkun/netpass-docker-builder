@@ -1,5 +1,5 @@
 FROM gcc:latest
-LABEL version="0.1.0-alpha"
+LABEL version="0.1.1-alpha"
 LABEL vendor1="DanteyPL"
 
 WORKDIR /build
@@ -37,7 +37,7 @@ RUN wget https://github.com/diasurgical/bannertool/releases/download/1.2.0/banne
 RUN unzip bannertool.zip -d ./
 RUN cp ./linux-x86_64/bannertool $DEVKITPRO/tools/bin/
 
+COPY ./docker-entrypoint.sh ./ 
+
 WORKDIR /build/source
-# ENTRYPOINT [ "/bin/bash" ]
-ENTRYPOINT [ "make" ]
-CMD [ "clean", "codegen", ";","make","cia" ]
+ENTRYPOINT [ "/build/docker-entrypoint.sh" ]
