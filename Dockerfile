@@ -1,7 +1,10 @@
-FROM gcc:latest
-LABEL version="0.1.1-alpha"
+FROM debian:12
+LABEL version="0.2.0-alpha"
 LABEL vendor1="DanteyPL"
-
+# Install required packages to install dkp
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip
 WORKDIR /build
 # Installation of devkitpro-pacman; Script from https://devkitpro.org/wiki/devkitPro_pacman#:~:text=pacman%20instructions%20below.-,Debian%20and%20derivatives,devkitpro%2Dpacman%0A%20%20%20chmod%20%2Bx%20./install%2Ddevkitpro%2Dpacman%0A%20%20%20sudo%20./install%2Ddevkitpro%2Dpacman,-The%20apt%20repository
 RUN wget https://apt.devkitpro.org/install-devkitpro-pacman
@@ -19,7 +22,7 @@ RUN echo "export PATH=$PATH:/opt/devkitpro/devkitARM/bin" >> ~/.bashrc
 # Adding required enviroment variables
 ENV DEVKITPRO /opt/devkitpro
 ENV DEVKITARM /opt/devkitpro/devkitARM
-
+# Install netpass packages dependencies
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     python3 \
