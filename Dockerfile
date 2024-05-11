@@ -1,5 +1,5 @@
 FROM debian:12
-LABEL version="0.2.0-alpha"
+LABEL version="0.2.1-alpha"
 LABEL vendor1="DanteyPL"
 # Install required packages to install dkp
 RUN apt-get update && apt-get install -y \
@@ -23,7 +23,7 @@ RUN echo "export PATH=$PATH:/opt/devkitpro/devkitARM/bin" >> ~/.bashrc
 ENV DEVKITPRO /opt/devkitpro
 ENV DEVKITARM /opt/devkitpro/devkitARM
 # Install netpass packages dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y \
     ffmpeg \
     python3 \
     python3-pip
