@@ -1,5 +1,5 @@
 FROM debian:12
-LABEL version="0.2.1-alpha"
+LABEL version="0.2.2-alpha"
 LABEL vendor1="DanteyPL"
 # Install required packages to install dkp
 RUN apt-get update && apt-get install -y \

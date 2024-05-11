@@ -6,5 +6,4 @@ if [[ $# -eq 0 ]];then
 else
     # shellcheck disable=SC2068
     make $@
-    $#
 fi
