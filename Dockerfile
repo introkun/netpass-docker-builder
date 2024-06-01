@@ -1,6 +1,7 @@
 FROM debian:12
-LABEL version="0.2.2-alpha"
+LABEL version="0.2.3-alpha"
 LABEL vendor1="DanteyPL"
+ARG DEBIAN_FRONTEND=noninteractive
 # Install required packages to install dkp
 RUN apt-get update && apt-get install -y \
     wget \
@@ -41,6 +42,7 @@ RUN unzip bannertool.zip -d ./
 RUN cp ./linux-x86_64/bannertool $DEVKITPRO/tools/bin/
 
 COPY ./docker-entrypoint.sh ./ 
-
+# Clean package cache and list
+RUN rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 WORKDIR /build/source
 ENTRYPOINT [ "/build/docker-entrypoint.sh" ]
