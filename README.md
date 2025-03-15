@@ -14,7 +14,7 @@ Checkout original NetPass source and inside run command:
 docker run --rm -v ./:/build/source -u $(id -u):$(id -g) -ti netpass_builder
 ```
 
-By default builder will execute command `make clean codegen;make cia`, to override arguments to `make` add at the end of previous command arguments of your choose. 
+By default builder will execute command `make clean cia`, to override arguments to `make` add at the end of previous command arguments of your choose. 
 
 Example:
 ```bash
