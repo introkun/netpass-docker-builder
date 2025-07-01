@@ -1,6 +1,12 @@
 FROM debian:12
 LABEL version="0.2.4-alpha"
 LABEL vendor1="DanteyPL"
+
+LABEL org.opencontainers.image.licenses="GPL-3.0"
+LABEL org.opencontainers.image.source="https://github.com/introkun/netpass-docker-builder"
+LABEL org.opencontainers.image.version="0.2.4-alpha-fork1"
+LABEL vendor2="introkun"
+
 ARG DEBIAN_FRONTEND=noninteractive
 # Install required packages to install dkp
 RUN apt-get update && apt-get install -y \
@@ -21,28 +27,34 @@ RUN echo "export DEVKITPRO=/opt/devkitpro" >> ~/.bashrc \
     && echo "export DEVKITARM=/opt/devkitpro/devkitARM" >> ~/.bashrc \
     && echo "export PATH=$PATH:/opt/devkitpro/devkitARM/bin" >> ~/.bashrc 
 # Adding required enviroment variables
-ENV DEVKITPRO /opt/devkitpro
-ENV DEVKITARM /opt/devkitpro/devkitARM
+ENV DEVKITPRO=/opt/devkitpro
+ENV DEVKITARM=/opt/devkitpro/devkitARM
+ENV PATH="$PATH:/opt/devkitpro/devkitARM/bin"
 # Install netpass packages dependencies
 RUN apt-get update && apt-get --no-install-recommends install -y \
     ffmpeg \
+    git \
     python3 \
     python3-pip
 # Install Python requirements
 RUN pip install PyYAML --break-system-packages
-# Link pyton3 to python
+# Link python3 to python
 RUN ln -s $(which python3) /usr/bin/python
 
 RUN wget https://github.com/3DSGuy/Project_CTR/releases/download/makerom-v0.18.4/makerom-v0.18.4-ubuntu_x86_64.zip
 RUN unzip makerom-v0.18.4-ubuntu_x86_64.zip -d $DEVKITPRO/tools/bin/
-RUN chmod +x  $DEVKITPRO/tools/bin/makerom
+RUN chmod +x $DEVKITPRO/tools/bin/makerom
 
 RUN wget https://github.com/diasurgical/bannertool/releases/download/1.2.0/bannertool.zip
 RUN unzip bannertool.zip -d ./
 RUN cp ./linux-x86_64/bannertool $DEVKITPRO/tools/bin/
 
 COPY ./docker-entrypoint.sh ./ 
+
 # Clean package cache and list
 RUN rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
+RUN rm makerom-v0.18.4-ubuntu_x86_64.zip bannertool.zip
+
 WORKDIR /build/source
+RUN chmod +x /build/docker-entrypoint.sh
 ENTRYPOINT [ "/build/docker-entrypoint.sh" ]
