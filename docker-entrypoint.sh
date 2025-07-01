@@ -2,7 +2,7 @@
 set -e
 
 if [[ $# -eq 0 ]]; then
-    make clean cia
+    make clean && make release
 else
     # shellcheck disable=SC2068
     make "$@"
