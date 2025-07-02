@@ -15,7 +15,7 @@ RUN apt-get update && \
         wget \
         unzip \
         ca-certificates \
-    && pip3 install PyYAML --break-system-packages \
+    && pip3 install PyYAML \
     && rm -rf /var/lib/apt/lists/*
 
 # Link python3 to python (optional)
