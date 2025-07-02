@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     unzip
 WORKDIR /build
 # Installation of devkitpro-pacman; Script from https://devkitpro.org/wiki/devkitPro_pacman#:~:text=pacman%20instructions%20below.-,Debian%20and%20derivatives,devkitpro%2Dpacman%0A%20%20%20chmod%20%2Bx%20./install%2Ddevkitpro%2Dpacman%0A%20%20%20sudo%20./install%2Ddevkitpro%2Dpacman,-The%20apt%20repository
-RUN wget https://raw.githubusercontent.com/devkitPro/installer/master/install-devkitpro-pacman -O install-devkitpro-pacman
+RUN wget https://apt.devkitpro.org/install-devkitpro-pacman
 RUN chmod +x ./install-devkitpro-pacman
 # Workaround for automation
 RUN sed -i -e 's/apt-get install/apt-get install -y/' ./install-devkitpro-pacman
