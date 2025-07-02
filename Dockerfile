@@ -19,7 +19,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Link python3 to python (optional)
-RUN ln -s $(which python3) /usr/bin/python
+RUN ln -sf $(which python3) /usr/bin/python
 
 # Install makerom
 RUN wget https://github.com/3DSGuy/Project_CTR/releases/download/makerom-v0.18.4/makerom-v0.18.4-ubuntu_x86_64.zip && \
