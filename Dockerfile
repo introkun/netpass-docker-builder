@@ -13,7 +13,7 @@ WORKDIR /build
 # Install apt dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    wget unzip ca-certificates && \
+    wget unzip ca-certificates gnupg && \
     rm -rf /var/lib/apt/lists/*
 
 # Install devkitpro pacman
