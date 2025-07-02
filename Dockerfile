@@ -34,6 +34,7 @@ ENV PATH="$PATH:/opt/devkitpro/devkitARM/bin"
 RUN apt-get update && apt-get --no-install-recommends install -y \
     ffmpeg \
     git \
+    cppcheck \
     python3 \
     python3-pip
 # Install Python requirements
