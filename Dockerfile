@@ -35,8 +35,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     ffmpeg \
     git \
     python3 \
-    python3-pip \
-    && apt-get install --only-upgrade cppcheck
+    python3-pip
 # Install Python requirements
 RUN pip install PyYAML --break-system-packages
 # Link python3 to python
