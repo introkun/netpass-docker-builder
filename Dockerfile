@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:12-slim
 LABEL version="0.2.4-alpha"
 LABEL vendor1="DanteyPL"
 
@@ -34,9 +34,9 @@ ENV PATH="$PATH:/opt/devkitpro/devkitARM/bin"
 RUN apt-get update && apt-get --no-install-recommends install -y \
     ffmpeg \
     git \
-    cppcheck \
     python3 \
-    python3-pip
+    python3-pip \
+    && apt-get install --only-upgrade cppcheck
 # Install Python requirements
 RUN pip install PyYAML --break-system-packages
 # Link python3 to python
