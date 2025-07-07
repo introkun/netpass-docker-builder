@@ -3,6 +3,8 @@ set -e
 
 if [[ $# -eq 0 ]]; then
     make clean && make release
+elif [[ $1 == "default" ]]; then
+    make
 else
     # shellcheck disable=SC2068
     make "$@"
