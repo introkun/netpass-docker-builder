@@ -30,20 +30,22 @@ RUN echo "export DEVKITPRO=/opt/devkitpro" >> ~/.bashrc \
 ENV DEVKITPRO=/opt/devkitpro
 ENV DEVKITARM=/opt/devkitpro/devkitARM
 ENV PATH="$PATH:/opt/devkitpro/devkitARM/bin"
-# Install netpass packages dependencies
+# Install Python and dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ffmpeg \
-    git \
     python3 \
     python3-pip \
+    python3-venv \
+    python3-distutils \
     ca-certificates \
+    ffmpeg \
+    git \
     && update-ca-certificates \
     && apt-get install --only-upgrade cppcheck \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python requirements
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir PyYAML requests
+RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
+    python3 -m pip install --no-cache-dir PyYAML requests
 # Link python3 to python
 RUN ln -s $(which python3) /usr/bin/python
 
