@@ -44,9 +44,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python requirements
-RUN python3 -m pip install -v requests || true
-RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
-    python3 -m pip install --no-cache-dir PyYAML requests
+RUN python3 -m pip install --no-cache-dir --break-system-packages \
+    --upgrade pip setuptools wheel && \
+    python3 -m pip install --no-cache-dir --break-system-packages \
+    PyYAML requests
 # Link python3 to python
 RUN ln -s $(which python3) /usr/bin/python
 
