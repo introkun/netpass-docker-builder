@@ -31,15 +31,19 @@ ENV DEVKITPRO=/opt/devkitpro
 ENV DEVKITARM=/opt/devkitpro/devkitARM
 ENV PATH="$PATH:/opt/devkitpro/devkitARM/bin"
 # Install netpass packages dependencies
-RUN apt-get update && apt-get --no-install-recommends install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     git \
     python3 \
     python3-pip \
-    && apt-get install --only-upgrade cppcheck
+    ca-certificates \
+    && update-ca-certificates \
+    && apt-get install --only-upgrade cppcheck \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Install Python requirements
-RUN pip install PyYAML --break-system-packages
-RUN pip install requests
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir PyYAML requests
 # Link python3 to python
 RUN ln -s $(which python3) /usr/bin/python
 
