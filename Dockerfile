@@ -39,6 +39,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     && apt-get install --only-upgrade cppcheck
 # Install Python requirements
 RUN pip install PyYAML --break-system-packages
+RUN pip install requests
 # Link python3 to python
 RUN ln -s $(which python3) /usr/bin/python
 
